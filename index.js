@@ -240,13 +240,13 @@ app.get('/products/sort/popularity', (req, res) => {
 app.get('/products/sort/price-high-to-low', (req, res) => {
   let productsCopy = products.slice();
   productsCopy.sort((product1, product2) => product2.price - product1.price);
-  res.json(productsCopy);
+  res.json({ products: productsCopy });
 });
 
 app.get('/products/sort/price-low-to-high', (req, res) => {
   let productsCopy = products.slice();
   productsCopy.sort((product1, product2) => product1.price - product2.price);
-  res.json(productsCopy);
+  res.json({ products: productsCopy });
 });
 
 function filterByRAM(product, ram) {
@@ -256,7 +256,7 @@ function filterByRAM(product, ram) {
 app.get('/products/filter/ram', (req, res) => {
   let ram = parseFloat(req.query.ram);
   let result = products.filter((product) => filterByRAM(product, ram));
-  res.json(result);
+  res.json({products: result});
 });
 
 function filterByROM(product, rom) {
@@ -266,7 +266,7 @@ function filterByROM(product, rom) {
 app.get('/products/filter/rom', (req, res) => {
   let rom = parseFloat(req.query.rom);
   let result = products.filter((product) => filterByROM(product, rom));
-  res.json(result);
+  res.json({products: result});
 });
 
 function filterByBrand(product, brand) {
@@ -276,7 +276,7 @@ function filterByBrand(product, brand) {
 app.get('/products/filter/brand', (req, res) => {
   let brand = req.query.brand.toLowerCase();
   let result = products.filter((product) => filterByBrand(product, brand));
-  res.json(result);
+  res.json({products: result});
 });
 
 function filterByOs(product, os) {
@@ -286,7 +286,7 @@ function filterByOs(product, os) {
 app.get('/products/filter/os', (req, res) => {
   let os = req.query.os.toLowerCase();
   let result = products.filter((product) => filterByOs(product, os));
-  res.json(result);
+  res.json({products: result});
 });
 
 function filterByPrice(product, price) {
@@ -296,11 +296,11 @@ function filterByPrice(product, price) {
 app.get('/products/filter/price', (req, res) => {
   let price = parseFloat(req.query.price);
   let result = products.filter((product) => filterByPrice(product, price));
-  res.json(result);
+  res.json({products: result});
 });
 
 app.get('/products', (req, res) => {
-  res.json(products);
+  res.json({products: products});
 });
 
 app.listen(port, () => {
