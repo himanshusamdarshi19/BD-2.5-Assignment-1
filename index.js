@@ -270,21 +270,21 @@ app.get('/products/filter/rom', (req, res) => {
 });
 
 function filterByBrand(product, brand) {
-  return product.brand === brand;
+  return product.brand.toLowerCase() === brand;
 }
 
 app.get('/products/filter/brand', (req, res) => {
-  let brand = req.query.brand;
+  let brand = req.query.brand.toLowerCase();
   let result = products.filter((product) => filterByBrand(product, brand));
   res.json(result);
 });
 
 function filterByOs(product, os) {
-  return product.os === os;
+  return product.os.toLowerCase() === os;
 }
 
 app.get('/products/filter/os', (req, res) => {
-  let os = req.query.os;
+  let os = req.query.os.toLowerCase();
   let result = products.filter((product) => filterByOs(product, os));
   res.json(result);
 });
